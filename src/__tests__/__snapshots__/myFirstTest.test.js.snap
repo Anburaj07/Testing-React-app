@@ -4,5 +4,7 @@ exports[`Checking Counter function Button 1`] = `
 <button
   className="large blue"
   data-testid="test-button"
-/>
+>
+  Click Me
+</button>
 `;
