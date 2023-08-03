@@ -5,6 +5,7 @@ import { click } from "@testing-library/user-event/dist/click";
 import Counter from "../components/Counter";
 import renderer from 'react-test-renderer';
 import TimeConversion from "../components/TimeConversion";
+import calculateTax from "../components/TaxCalculator";
 
 //component testing
 describe("Testing Button Component",()=>{
@@ -87,4 +88,31 @@ describe("Testing Timer Component",()=>{
         expect(TimerElement).toHaveTextContent("3 minutes 20 seconds");
       });
 })
+
+describe('Tax Calculator', () => {
+    it('should calculate zero tax for income below 2,50,000', () => {
+      expect(calculateTax(200000, 0)).toBe(0);
+    });
+  
+    it('should calculate 10% tax correctly for income between 2,50,000 and 5,00,000', () => {
+      expect(calculateTax(300000, 0)).toBe(5000);
+      expect(calculateTax(400000, 0)).toBe(15000);
+    });
+  
+    it('should calculate 20% tax correctly for income between 5,00,000 and 10,00,000', () => {
+      expect(calculateTax(600000, 0)).toBe(45000);
+      expect(calculateTax(800000, 0)).toBe(85000);
+    });
+  
+    it('should calculate 30% tax correctly for income above 10,00,000', () => {
+      expect(calculateTax(1200000, 0)).toBe(185000);
+      expect(calculateTax(1500000, 0)).toBe(275000);
+    });
+  
+    it('should apply rebate correctly for savings based on income', () => {
+      expect(calculateTax(400000, 20000)).toBe(14000);
+      expect(calculateTax(800000, 60000)).toBe(81400); 
+      expect(calculateTax(1200000, 150000)).toBe(180500);
+    });
+  });
 
