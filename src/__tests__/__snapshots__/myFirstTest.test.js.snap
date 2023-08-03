@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checking Counter function Button 1`] = `
+<button
+  className="large blue"
+  data-testid="test-button"
+/>
+`;

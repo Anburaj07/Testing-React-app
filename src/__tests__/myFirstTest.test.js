@@ -3,6 +3,7 @@ import Button from "../components/Button"
 import App from "../App";
 import { click } from "@testing-library/user-event/dist/click";
 import Counter from "../components/Counter";
+import renderer from 'react-test-renderer';
 
 //component testing
 describe("Testing Button Component",()=>{
@@ -53,6 +54,15 @@ describe("Checking Counter function",()=>{
         expect(counter).toHaveTextContent(1);
         fireEvent.click(button);
         expect(counter).toHaveTextContent(2);
+    })
+
+    it("Button",()=>{
+        const tree=renderer
+        .create(
+            <Button color="blue" size="large">Click Me</Button>
+        ).toJSON();
+        expect(tree).toMatchSnapshot();
+
     })
 })
 
